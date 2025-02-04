@@ -3,81 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Te Amo</title>
+    <title>Botón Corazón</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #ffe6e6;
         }
         .heart-button {
+            position: relative;
+            width: 120px;
+            height: 120px;
             background-color: red;
-  
-            font-size: 16px;
-            font-weight: bold;
             border: none;
             cursor: pointer;
-            width: 60px;
-            height: 60px;
-            position: relative;
-            transform: rotate(-45deg);
-            margin-top: 20px;
+            outline: none;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            transform: rotate(45deg);
         }
-        .heart-button::before, .heart-button::after {
+        .heart-button::before,
+        .heart-button::after {
             content: "";
             position: absolute;
-            width: 60px;
-            height: 60px;
+            width: 120px;
+            height: 120px;
             background-color: red;
             border-radius: 50%;
         }
         .heart-button::before {
-            top: -30px;
+            top: -60px;
             left: 0;
         }
         .heart-button::after {
-            left: 30px;
+            left: -60px;
             top: 0;
         }
-        p {
-            font-size: 18px;
-            margin-top: 20px;
+        .heart-text {
+            position: absolute;
+            transform: rotate(-45deg);
         }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: left;
-            overflow-x: auto;
+        #counter {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Presiona el botón</h1>
-    <button class="heart-button" id="loveButton">Te Amo</button>
-    <p>Has presionado el botón <span id="counter">0</span> veces.</p>
-    <h2>Código Fuente:</h2>
-    <pre><code id="codeBlock"></code></pre>
-
+    <button class="heart-button" onclick="increaseCount()">
+        <span class="heart-text">Te Amo</span>
+    </button>
+    <div id="counter">Veces presionado: <span id="count">0</span></div>
+    
     <script>
-        let count = localStorage.getItem("loveCount") || 0;
-        document.getElementById("counter").innerText = count;
-        
-        document.getElementById("loveButton").addEventListener("click", function() {
+        let count = 0;
+        function increaseCount() {
             count++;
-            localStorage.setItem("loveCount", count);
-            document.getElementById("counter").innerText = count;
-        });
-
-        // Mostrar el código fuente
-        fetch(window.location.href)
-            .then(response => response.text())
-            .then(text => {
-                document.getElementById("codeBlock").innerText = text;
-            });
+            document.getElementById("count").textContent = count;
+        }
     </script>
 </body>
 </html>
